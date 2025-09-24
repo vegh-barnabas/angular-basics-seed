@@ -1,17 +1,19 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
+import { Donut } from '../../models/donut.model';
 
 @Component({
   selector: 'donut-list',
-  template: ` <div>
-    <div>{{ donut.name }}</div>
-    <div>{{ donut.price }}</div>
-  </div>`,
-  styles: [],
+  template: `
+    <div *ngFor="let donut of donuts">
+      <donut-card [donut]="donut" class="donut-card"></donut-card>
+    </div>
+  `,
+  styles: [``],
 })
 export class DonutListComponent implements OnInit {
-  donuts!: any[];
-  donut: any;
+  donuts!: Donut[];
+  donut!: Donut;
 
   ngOnInit(): void {
     this.donuts = [
@@ -38,6 +40,6 @@ export class DonutListComponent implements OnInit {
       },
     ];
 
-    this.donut = this.donuts[0];
+    this.donut = this.donuts[2];
   }
 }

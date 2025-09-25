@@ -23,6 +23,7 @@ export class DonutListComponent implements OnInit {
         icon: 'just-chocolate',
         price: 119,
         description: 'For the chocolate lover',
+        promo: true,
       },
       {
         id: 'bk48bm',

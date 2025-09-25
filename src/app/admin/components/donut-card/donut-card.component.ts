@@ -3,7 +3,11 @@ import { Donut } from '../../models/donut.model';
 
 @Component({
   selector: 'donut-card',
-  template: ` <img
+  template: ` <div
+    class="donut-card"
+    [style.border]="donut.promo ? '2px solid #eee' : 'none'"
+  >
+    <img
       src="/assets/img/{{ donut.icon }}.svg"
       [alt]="donut.name"
       class="donut-card-icon"
@@ -15,10 +19,11 @@ import { Donut } from '../../models/donut.model';
       <p class="donut-card-price">
         {{ donut.price }}
       </p>
-    </div>`,
+    </div>
+  </div>`,
   styles: [
     `
-      :host {
+      .donut-card {
         display: flex;
         align-items: center;
         gap: 12px;
@@ -31,20 +36,20 @@ import { Donut } from '../../models/donut.model';
         &:hover {
           transform: translateY(-3px);
         }
-      }
 
-      .donut-card {
-        &-name {
-          font-size: 16px;
-        }
+        .donut-card {
+          &-name {
+            font-size: 16px;
+          }
 
-        &-price {
-          font-size: 14px;
-          color: #c14583;
-        }
+          &-price {
+            font-size: 14px;
+            color: #c14583;
+          }
 
-        &-icon {
-          width: 50px;
+          &-icon {
+            width: 50px;
+          }
         }
       }
     `,

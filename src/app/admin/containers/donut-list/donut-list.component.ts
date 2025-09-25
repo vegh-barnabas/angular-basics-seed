@@ -36,7 +36,6 @@ export class DonutListComponent implements OnInit {
         icon: 'glazed-fudge',
         price: 129,
         description: 'Sticky perfection',
-        promo: 'limited',
       },
       {
         id: 'bk48bm',
@@ -44,6 +43,22 @@ export class DonutListComponent implements OnInit {
         icon: 'caramel-swirl',
         price: 129,
         description: 'Chocolate drizzled with caramel',
+        promo: 'limited',
+      },
+      {
+        id: '96km45',
+        name: 'Sour Supreme',
+        icon: 'sour-supreme',
+        price: 159,
+        description: 'For the sour advocate',
+      },
+      {
+        id: 'mgk75l',
+        name: 'Zesty Lemon',
+        icon: 'zesty-lemon',
+        price: 139,
+        description: 'Delicious lucious lemon',
+        promo: 'limited',
       },
     ];
     // this.donuts = [];

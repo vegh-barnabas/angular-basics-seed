@@ -5,7 +5,10 @@ import { Donut } from '../../models/donut.model';
   selector: 'donut-card',
   template: ` <div
     class="donut-card"
-    [ngStyle]="{ border: donut.promo ? '2px solid #eee' : 'none' }"
+    [ngClass]="{
+      'donut-card-promo': donut.promo,
+      'donut-card-not-promo': !donut.promo
+    }"
   >
     <img
       src="/assets/img/{{ donut.icon }}.svg"
@@ -37,19 +40,21 @@ import { Donut } from '../../models/donut.model';
           transform: translateY(-3px);
         }
 
-        .donut-card {
-          &-name {
-            font-size: 16px;
-          }
+        &-name {
+          font-size: 16px;
+        }
 
-          &-price {
-            font-size: 14px;
-            color: #c14583;
-          }
+        &-price {
+          font-size: 14px;
+          color: #c14583;
+        }
 
-          &-icon {
-            width: 50px;
-          }
+        &-icon {
+          width: 50px;
+        }
+
+        &-promo {
+          border: 2px solid #eee;
         }
       }
     `,

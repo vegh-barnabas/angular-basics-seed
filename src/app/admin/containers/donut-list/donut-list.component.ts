@@ -6,7 +6,7 @@ import { Donut } from '../../models/donut.model';
   selector: 'donut-list',
   template: `
     <ng-container *ngIf="donuts.length > 0; else emptyList">
-      <div *ngFor="let donut of donuts">
+      <div *ngFor="let donut of donuts; trackBy: trackById">
         <donut-card [donut]="donut" class="donut-card"></donut-card>
       </div>
     </ng-container>
@@ -28,7 +28,7 @@ export class DonutListComponent implements OnInit {
         icon: 'just-chocolate',
         price: 119,
         description: 'For the chocolate lover',
-        promo: true,
+        promo: 'new',
       },
       {
         id: 'bk48bm',
@@ -36,6 +36,7 @@ export class DonutListComponent implements OnInit {
         icon: 'glazed-fudge',
         price: 129,
         description: 'Sticky perfection',
+        promo: 'limited',
       },
       {
         id: 'bk48bm',
@@ -48,5 +49,9 @@ export class DonutListComponent implements OnInit {
     // this.donuts = [];
 
     this.donut = this.donuts[2];
+  }
+
+  trackById(index: number, item: Donut): string {
+    return item.id;
   }
 }

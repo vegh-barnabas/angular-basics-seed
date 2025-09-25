@@ -5,7 +5,7 @@ import { Donut } from '../../models/donut.model';
   selector: 'donut-card',
   template: ` <div
     class="donut-card"
-    [style.border]="donut.promo ? '2px solid #eee' : 'none'"
+    [ngStyle]="{ border: donut.promo ? '2px solid #eee' : 'none' }"
   >
     <img
       src="/assets/img/{{ donut.icon }}.svg"

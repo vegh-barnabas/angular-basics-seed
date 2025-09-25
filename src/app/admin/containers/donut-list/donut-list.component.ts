@@ -5,9 +5,14 @@ import { Donut } from '../../models/donut.model';
 @Component({
   selector: 'donut-list',
   template: `
-    <div *ngFor="let donut of donuts">
-      <donut-card [donut]="donut" class="donut-card"></donut-card>
-    </div>
+    <ng-container *ngIf="donuts.length > 0; else emptyList">
+      <div *ngFor="let donut of donuts">
+        <donut-card [donut]="donut" class="donut-card"></donut-card>
+      </div>
+    </ng-container>
+    <ng-template #emptyList>
+      <div>List is empty!</div>
+    </ng-template>
   `,
   styles: [``],
 })
@@ -40,6 +45,7 @@ export class DonutListComponent implements OnInit {
         description: 'Chocolate drizzled with caramel',
       },
     ];
+    // this.donuts = [];
 
     this.donut = this.donuts[2];
   }

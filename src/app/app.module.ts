@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { DonutListComponent } from './admin/containers/donut-list/donut-list.component';
-import { DonutCardComponent } from './admin/components/donut-card/donut-card.component';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
-  declarations: [AppComponent, DonutListComponent, DonutCardComponent],
-  imports: [BrowserModule],
+  declarations: [AppComponent],
+  imports: [BrowserModule, FormsModule, AdminModule],
   bootstrap: [AppComponent],
-  exports: [DonutListComponent],
+  exports: [],
 })
 export class AppModule {}

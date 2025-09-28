@@ -1,35 +1,64 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'donut-form',
   template: `
-    <form class="donut-form" #form="ngForm">
+    <form class="donut-form" #form="ngForm" (ngSubmit)="handleSubmit(form)">
       <label>
         <span>Name</span>
         <input
           type="text"
           class="input"
-          name="Name"
+          name="name"
           required
+          minlength="5"
           ngModel
           #name="ngModel"
         />
-        <p>{{ name.value }}</p>
-        <p>{{ name.valid }}</p>
-        <p>{{ name.dirty }}</p>
-        <p>{{ name.touched }}</p>
+        <ng-container *ngIf="name.invalid && name.touched">
+          <div class="donut-form-error" *ngIf="name.errors?.required">
+            Name is required.
+          </div>
+          <div class="donut-form-error" *ngIf="name.errors?.minlength">
+            The minimum length of a name is 5.
+          </div>
+        </ng-container>
       </label>
       <label>
         <span>Icon</span>
-        <select name="icon" class="input input--select" required ngModel>
+        <select
+          name="icon"
+          class="input input--select"
+          required
+          ngModel
+          #icon="ngModel"
+        >
           <option *ngFor="let icon of icons" [ngValue]="icon">
             {{ icon }}
           </option>
         </select>
+        <ng-container *ngIf="icon.invalid && icon.touched">
+          <div class="donut-form-error" *ngIf="icon.errors?.required">
+            Icon is required.
+          </div>
+        </ng-container>
       </label>
       <label>
         <span>Price</span>
-        <input type="number" class="input" name="price" required ngModel />
+        <input
+          type="number"
+          class="input"
+          name="price"
+          required
+          ngModel
+          #price="ngModel"
+        />
+        <ng-container *ngIf="price.invalid && price.touched">
+          <div class="donut-form-error" *ngIf="price.errors?.required">
+            Price is required.
+          </div>
+        </ng-container>
       </label>
       <div class="donut-form-radios">
         <p class="donut-form-radios-label">Promo:</p>
@@ -37,18 +66,18 @@ import { Component } from '@angular/core';
           <input
             type="radio"
             name="promo"
-            required
             [value]="undefined"
             ngModel
+            #promo="ngModel"
           />
           <span>None</span>
         </label>
         <label>
-          <input type="radio" name="promo" required value="new" ngModel />
+          <input type="radio" name="promo" value="new" ngModel />
           <span>New</span>
         </label>
         <label>
-          <input type="radio" name="promo" required value="limited" ngModel />
+          <input type="radio" name="promo" value="limited" ngModel />
           <span>Limited</span>
         </label>
       </div>
@@ -60,8 +89,18 @@ import { Component } from '@angular/core';
           class="input input--textarea"
           required
           ngModel
+          #description="ngModel"
         ></textarea>
+        <ng-container *ngIf="description.invalid && description.touched">
+          <div class="donut-form-error" *ngIf="description.errors?.required">
+            Description is required.
+          </div>
+        </ng-container>
       </label>
+
+      <button type="submit" class="btn btn--green" [disabled]="form.invalid">
+        Create
+      </button>
 
       <pre>{{ form.value | json }}</pre>
       <pre>{{ form.form.status | json }}</pre>
@@ -88,6 +127,11 @@ import { Component } from '@angular/core';
             }
           }
         }
+
+        &-error {
+          font-size: 12px;
+          color: #e66262;
+        }
       }
     `,
   ],
@@ -103,5 +147,11 @@ export class DonutFormComponent {
     'zesty-lemon',
   ];
 
-  constructor() {}
+  handleSubmit(form: NgForm) {
+    if (!form.valid) {
+      return;
+    }
+
+    console.log(form.value);
+  }
 }

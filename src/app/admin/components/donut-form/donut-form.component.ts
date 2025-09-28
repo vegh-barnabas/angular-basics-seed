@@ -14,6 +14,7 @@ import { NgForm } from '@angular/forms';
           required
           minlength="5"
           ngModel
+          [ngModelOptions]="{ updateOn: 'blur' }"
           #name="ngModel"
         />
         <ng-container *ngIf="name.invalid && name.touched">
@@ -98,9 +99,14 @@ import { NgForm } from '@angular/forms';
         </ng-container>
       </label>
 
-      <button type="submit" class="btn btn--green" [disabled]="form.invalid">
-        Create
+      <button type="submit" class="btn btn--green">Create</button>
+      <button type="button" class="btn btn--grey" (click)="form.resetForm()">
+        Reset form
       </button>
+
+      <div class="donut-form-working" *ngIf="form.valid && form.submitted">
+        Working...
+      </div>
 
       <pre>{{ form.value | json }}</pre>
       <pre>{{ form.form.status | json }}</pre>
@@ -128,6 +134,12 @@ import { NgForm } from '@angular/forms';
           }
         }
 
+        &-working {
+          font-size: 12px;
+          font-style: italic;
+          margin: 10px 0;
+        }
+
         &-error {
           font-size: 12px;
           color: #e66262;
@@ -149,7 +161,7 @@ export class DonutFormComponent {
 
   handleSubmit(form: NgForm) {
     if (!form.valid) {
-      return;
+      form.form.markAllAsTouched();
     }
 
     console.log(form.value);

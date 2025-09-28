@@ -6,7 +6,18 @@ import { Component } from '@angular/core';
     <form class="donut-form" #form="ngForm">
       <label>
         <span>Name</span>
-        <input type="text" class="input" name="Name" required ngModel />
+        <input
+          type="text"
+          class="input"
+          name="Name"
+          required
+          ngModel
+          #name="ngModel"
+        />
+        <p>{{ name.value }}</p>
+        <p>{{ name.valid }}</p>
+        <p>{{ name.dirty }}</p>
+        <p>{{ name.touched }}</p>
       </label>
       <label>
         <span>Icon</span>
@@ -52,7 +63,8 @@ import { Component } from '@angular/core';
         ></textarea>
       </label>
 
-      {{ form.value | json }}
+      <pre>{{ form.value | json }}</pre>
+      <pre>{{ form.form.status | json }}</pre>
     </form>
   `,
   styles: [

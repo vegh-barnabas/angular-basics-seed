@@ -121,6 +121,9 @@ import { Donut } from '../../models/donut.model';
       >
         Update
       </button>
+      <button type="submit" class="btn btn--green" (click)="handleDelete()">
+        Delete
+      </button>
       <button type="button" class="btn btn--grey" (click)="form.resetForm()">
         Reset form
       </button>
@@ -173,6 +176,7 @@ import { Donut } from '../../models/donut.model';
 export class DonutFormComponent {
   @Output() create = new EventEmitter<Donut>();
   @Output() update = new EventEmitter<Donut>();
+  @Output() delete = new EventEmitter<Donut>();
   @Input() donut!: Donut;
 
   icons: string[] = [
@@ -200,5 +204,11 @@ export class DonutFormComponent {
     }
 
     this.update.emit({ id: this.donut.id, ...form.value });
+  }
+
+  handleDelete() {
+    if (confirm(`Really delete ${this.donut.name}?`)) {
+      this.delete.emit({ ...this.donut });
+    }
   }
 }

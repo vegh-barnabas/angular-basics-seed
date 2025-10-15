@@ -18,6 +18,6 @@ import { DonutFormComponent } from './components/donut-form/donut-form.component
     DonutFormComponent,
   ],
   imports: [CommonModule, FormsModule],
-  exports: [DonutSingleComponent],
+  exports: [DonutSingleComponent, DonutListComponent],
 })
 export class AdminModule {}

@@ -47,4 +47,29 @@ export class DonutService {
   ];
 
   constructor() {}
+
+  read() {
+    return this.donuts;
+  }
+
+  readOne(id: string) {
+    const donut = this.donuts.find((donut) => donut.id === id);
+
+    if (donut) {
+      return donut;
+    }
+
+    return {
+      id: '',
+      name: '',
+      icon: '',
+      price: 0,
+      description: '',
+    };
+  }
+
+  create(payload: Donut) {
+    this.donuts = [...this.donuts, payload];
+    console.log(this.donuts);
+  }
 }

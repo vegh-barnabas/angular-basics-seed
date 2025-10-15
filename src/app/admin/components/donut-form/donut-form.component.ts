@@ -5,7 +5,7 @@ import { Donut } from '../../models/donut.model';
 @Component({
   selector: 'donut-form',
   template: `
-    <form class="donut-form" #form="ngForm" (ngSubmit)="handleSubmit(form)">
+    <form class="donut-form" #form="ngForm">
       <label>
         <span>Name</span>
         <input
@@ -110,7 +110,17 @@ import { Donut } from '../../models/donut.model';
         </ng-container>
       </label>
 
-      <button type="submit" class="btn btn--green">Create</button>
+      <button type="submit" class="btn btn--green" (click)="handleCreate(form)">
+        Create
+      </button>
+      <button
+        type="submit"
+        class="btn btn--green"
+        [disabled]="form.untouched"
+        (click)="handleUpdate(form)"
+      >
+        Update
+      </button>
       <button type="button" class="btn btn--grey" (click)="form.resetForm()">
         Reset form
       </button>
@@ -162,6 +172,7 @@ import { Donut } from '../../models/donut.model';
 })
 export class DonutFormComponent {
   @Output() create = new EventEmitter<Donut>();
+  @Output() update = new EventEmitter<Donut>();
   @Input() donut!: Donut;
 
   icons: string[] = [
@@ -174,12 +185,20 @@ export class DonutFormComponent {
     'zesty-lemon',
   ];
 
-  handleSubmit(form: NgForm) {
+  handleCreate(form: NgForm) {
     if (!form.valid) {
       form.form.markAllAsTouched();
     }
 
-    console.log(form.value);
+    console.log('create', form.value);
     this.create.emit(form.value);
+  }
+
+  handleUpdate(form: NgForm) {
+    if (!form.valid) {
+      form.form.markAllAsTouched();
+    }
+
+    this.update.emit({ id: this.donut.id, ...form.value });
   }
 }

@@ -5,7 +5,7 @@ import { Donut } from '../../models/donut.model';
 @Component({
   selector: 'donut-form',
   template: `
-    <form class="donut-form" #form="ngForm">
+    <form class="donut-form" #form="ngForm" *ngIf="donut; else loading">
       <label>
         <span>Name</span>
         <input
@@ -136,6 +136,7 @@ import { Donut } from '../../models/donut.model';
       <pre>{{ form.value | json }}</pre>
       <pre>{{ form.form.status | json }}</pre>
     </form>
+    <ng-template #loading> Loading... </ng-template>
   `,
   styles: [
     `

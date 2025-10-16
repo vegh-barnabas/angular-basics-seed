@@ -17,10 +17,12 @@ import { DonutService } from '../../services/donut.service';
   styles: [``],
 })
 export class DonutListComponent {
-  donuts!: Donut[];
+  donuts: Donut[] = [];
 
   constructor(private donutService: DonutService) {
-    this.donuts = this.donutService.read();
+    this.donutService
+      .read()
+      .subscribe((donuts: Donut[]) => (this.donuts = donuts));
   }
 
   trackById(index: number, item: Donut): string {

@@ -131,10 +131,6 @@ import { Donut } from '../../models/donut.model';
       <div class="donut-form-working" *ngIf="form.valid && form.submitted">
         Working...
       </div>
-
-      <pre>{{ donut | json }}</pre>
-      <pre>{{ form.value | json }}</pre>
-      <pre>{{ form.form.status | json }}</pre>
     </form>
     <ng-template #loading> Loading... </ng-template>
   `,
@@ -195,7 +191,6 @@ export class DonutFormComponent {
       form.form.markAllAsTouched();
     }
 
-    console.log('create', form.value);
     this.create.emit(form.value);
   }
 

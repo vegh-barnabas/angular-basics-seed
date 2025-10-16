@@ -18,14 +18,17 @@ export class DonutSingleComponent implements OnInit {
   constructor(private donutService: DonutService) {}
 
   ngOnInit(): void {
-    const id = 'a8mbk4';
+    const id = 'a8mbk4a';
     this.donutService
       .readOne(id)
       .subscribe((donut: Donut) => (this.donut = donut));
   }
 
   onCreate(donut: Donut) {
-    this.donutService.create(donut);
+    // Needs a subscription, without that the Observable doesn't execute
+    this.donutService
+      .create(donut)
+      .subscribe((donut) => console.log('Donut created', donut));
   }
 
   onUpdate(donut: Donut) {

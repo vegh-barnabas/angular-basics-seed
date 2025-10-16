@@ -37,6 +37,14 @@
       "price": 139,
       "description": "Delicious lucious lemon",
       "promo": "limited"
+    },
+    {
+      "name": "Golden Donut",
+      "icon": "zesty-lemon",
+      "price": 229,
+      "promo": "limited",
+      "description": "Coated with gold",
+      "id": "x9q8m3p"
     }
   ]
 }

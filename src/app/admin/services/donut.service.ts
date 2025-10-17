@@ -64,8 +64,10 @@ export class DonutService {
   }
 
   delete(payload: Donut) {
-    this.donuts = this.donuts.filter((donut) => donut.id !== payload.id);
-
-    console.log('deleted', this.donuts);
+    return this.http.delete<Donut>(`api/donuts/${payload.id}`).pipe(
+      tap(() => {
+        this.donuts = this.donuts.filter((donut) => donut.id !== payload.id);
+      })
+    );
   }
 }

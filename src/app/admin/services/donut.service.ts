@@ -37,22 +37,22 @@ export class DonutService {
       .pipe(tap((donuts) => (this.donuts = donuts)));
   }
 
-  readOne(id: string) {
+  readOne(id: string | null) {
     return this.read().pipe(
       map((donuts) => {
-        const donut = donuts.find((donut) => donut.id === id);
-
-        if (donut) {
-          return donut;
-        }
-
-        return {
+        const newDonut = {
           id: '',
           name: '',
           icon: '',
           price: 0,
           description: '',
         };
+
+        if (id === null) return newDonut;
+
+        const donut = donuts.find((donut) => donut.id === id);
+
+        return donut ?? newDonut;
       })
     );
   }

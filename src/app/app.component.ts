@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '../../node_modules/@angular/router/index';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',

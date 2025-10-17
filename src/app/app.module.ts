@@ -9,8 +9,15 @@ import { DonutListComponent } from './admin/containers/donut-list/donut-list.com
 import { DonutSingleComponent } from './admin/contactiners/donut-single/donut-single.component';
 
 export const routes: Routes = [
-  { path: '', component: DonutListComponent },
-  { path: 'donut', component: DonutSingleComponent },
+  { path: '', redirectTo: 'admin', pathMatch: 'full' },
+  {
+    path: 'admin',
+    children: [
+      { path: '', redirectTo: 'donuts', pathMatch: 'full' },
+      { path: 'donuts', component: DonutListComponent },
+      { path: 'donut', component: DonutSingleComponent },
+    ],
+  },
 ];
 
 @NgModule({
